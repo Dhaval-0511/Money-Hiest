@@ -1,5 +1,5 @@
 /* ==========================================================================
-   app.js — Paisa Plan front-end orchestration.
+   app.js — Money Heist front-end orchestration.
    Works identically against the real API (js/api.js) or the local demo
    engine (js/demo.js) — everything goes through the `backend` object below,
    which exposes the same async methods either way.

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   api.js — thin fetch wrapper around the Paisa Plan backend.
+   api.js — thin fetch wrapper around the Money Heist backend.
    All requests send credentials (httpOnly JWT cookie). No API keys or
    secrets ever live in this file — auth is entirely cookie-based.
    ========================================================================== */
