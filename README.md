@@ -1,308 +1,233 @@
 <div align="center">
 
 ```
-╔══════════════════════════════════════════════════════════════╗
-║                                                              ║
-║    💰  M O N E Y   H E I S T  💰                           ║
-║         — The Professor's Personal Finance App —            ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
+██████████████████████████████████████████████████████████████████
+██                                                              ██
+██   🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴    ██
+██                                                              ██
+██        ███╗   ███╗ ██████╗ ███╗   ██╗███████╗██╗   ██╗     ██
+██        ████╗ ████║██╔═══██╗████╗  ██║██╔════╝╚██╗ ██╔╝     ██
+██        ██╔████╔██║██║   ██║██╔██╗ ██║█████╗   ╚████╔╝      ██
+██        ██║╚██╔╝██║██║   ██║██║╚██╗██║██╔══╝    ╚██╔╝       ██
+██        ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║███████╗   ██║        ██
+██        ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝        ██
+██                                                              ██
+██    ██╗  ██╗███████╗██╗███████╗████████╗                     ██
+██    ██║  ██║██╔════╝██║██╔════╝╚══██╔══╝                     ██
+██    ███████║█████╗  ██║███████╗   ██║                        ██
+██    ██╔══██║██╔══╝  ██║╚════██║   ██║                        ██
+██    ██║  ██║███████╗██║███████║   ██║                        ██
+██    ╚═╝  ╚═╝╚══════╝╚═╝╚══════╝   ╚═╝                        ██
+██                                                              ██
+██         💰  T H E   P R O F E S S O R ' S                   ██
+██              P E R S O N A L   F I N A N C E                ██
+██                    H E I S T  💰                             ██
+██                                                              ██
+██   🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴  🔴    ██
+██                                                              ██
+██████████████████████████████████████████████████████████████████
 ```
 
-# 💰 Money Heist — Personal Expense Tracker
-
-> *"Every heist needs a perfect plan. Every salary needs a perfect budget."*
-> — The Professor (probably, if he tracked rupees instead of robbing banks)
-
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15%2B-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org)
-[![Express](https://img.shields.io/badge/Express-4.x-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/STATUS-HEIST%20ACTIVE-CC0000?style=for-the-badge)](#)
+[![Made For](https://img.shields.io/badge/MADE%20FOR-🇮🇳%20Indian%20Professionals-FF9933?style=for-the-badge)](#)
+[![Rupees Saved](https://img.shields.io/badge/RUPEES%20SAVED-∞-FFD700?style=for-the-badge)](#)
+[![Bella Ciao](https://img.shields.io/badge/BELLA%20CIAO-Unnecessary%20Expenses-8B0000?style=for-the-badge)](#)
 
 </div>
 
 ---
 
-## 🎭 The Story
+<div align="center">
 
-In *Money Heist*, the Professor planned every move with mathematical precision — not a single euro wasted, not a single second miscalculated.
+> ### 👨‍🏫 *"Every heist needs a perfect plan.*
+> ### *Every salary needs a perfect budget.*
+> ### *The question is — are you The Professor of your own finances,*
+> ### *or just another hostage of your impulse spending?"*
+>
+> — The Professor *(if he tracked ₹ instead of robbing banks)*
 
-Your salary deserves the same level of criminal genius.
-
-**Money Heist** is a personal expense & goals tracker built for Indian students and young professionals who want to take back control of their money — one rupee at a time. No bank robbery required. 😄
+</div>
 
 ---
 
-## 🗺️ The Heist Plan (Features)
+<br />
+
+## 🎭 ACT I — WHAT IT IS
 
 ```
-🏦  THE VAULT (Your Budget)
-├── 💼  Monthly salary + allowances planning
-├── 📊  Smart split: Expenses / Investments / Upskilling / Lifestyle
-├── 🧾  Bills & Shopping buckets
-└── 📈  Real-time budget vs. actual tracking
-
-💸  THE CREW (Expense Categories)
-├── 🍕  Expenses    → Food, transport, daily needs
-├── 🏥  Bills       → Recurring bills (recurring, with due dates!)
-├── 🛍️  Shopping    → That impulse buy you know you'll regret
-├── 📈  Investments → SIP, stocks, crypto — future you says thanks
-├── 📚  Upskilling  → Courses, books, certifications
-└── ✨  Lifestyle   → Gym, subscriptions, fun stuff
-
-💳  THE ESCAPE (Transactions)
-├── 💵  Cash or Online — track both separately
-├── 🏦  Funding source: Personal / Travel Allowance / Bill Allowance
-└── 📅  Date-wise transaction history
-
-🎯  THE GETAWAY (Goals)
-├── 🎯  Set savings goals (Garba classes? New laptop? Goa trip?)
-├── 💰  Track contributions over time
-└── ✅  Auto-marks Completed when you hit the target
-
-📊  THE INTEL (Analysis)
-├── 📉  Month-over-month spending trends
-├── 🥧  Category breakdown charts
-└── 🔍  Where did all the money go? (Chart.js powered)
+ ┌─────────────────────────────────────────────────────────────┐
+ │                                                             │
+ │   🔴  OPERATION: TAKE BACK YOUR SALARY  🔴                 │
+ │                                                             │
+ │   Target   →  Your bank account                             │
+ │   Mission  →  Know exactly where every ₹ went               │
+ │   Team     →  Just you. And this app.                       │
+ │   Status   →  CLASSIFIED                                    │
+ │                                                             │
+ └─────────────────────────────────────────────────────────────┘
 ```
 
+**Money Heist** is a personal expense & budget tracker built for **Indian students and young professionals** who are tired of watching their salary vanish into thin air by the 20th of every month.
+
+This isn't your generic "add expense, see pie chart" app.
+
+This is a **financial heist strategy tool** — designed to make budgeting feel less like a chore and more like **planning the most satisfying robbery of your own bad spending habits.**
+
+You plan your **salary split** before the month begins. You assign every rupee a role — like putting together a crew. Food, Bills, Shopping, Investments, Upskilling, Lifestyle — each category is a crew member with a job to do and a limit to respect. You track every transaction as it happens. You watch your goals inch closer week by week. And at month's end, for once, **you know exactly what happened to your money.**
+
+The app works completely **offline with demo data** — no setup, no backend required to explore. Just click "Explore with sample data" and the heist begins.
+
+> 🎭 *"In this heist, the bank is your salary. The plan is your budget. And the getaway? That's called financial freedom."*
+
 ---
 
-## 🛡️ Security (Because even the Professor had a safe house)
+<br />
 
-- 🔐 Passwords hashed with **bcrypt** (12 rounds) — no plain-text, ever
-- 🍪 JWT stored in **httpOnly cookies** — script injection can't steal your session
-- 🧱 **Helmet.js** security headers on every response
-- 🚦 **Rate limiting** globally + stricter on login endpoints
-- ✅ Every input validated with **express-validator**
-- 🔒 All SQL **parameterized** — zero string-built queries
-- 👤 Ownership checks on every read/write — your data stays yours
-
----
-
-## 🏗️ Architecture (The Blueprint)
+## 👨‍🏫 ACT II — WHY IT EXISTS
 
 ```
-money-heist/
-│
-├── 📁 backend/                 → The Professor's HQ (Node.js + Express + PostgreSQL)
-│   ├── server.js               → Main entry point
-│   ├── db.js                   → PostgreSQL connection pool
-│   ├── schema.sql              → Complete DB schema (tables + triggers)
-│   ├── .env.example            → Environment template (copy → .env)
-│   ├── middleware/
-│   │   └── auth.js             → JWT authentication middleware
-│   └── routes/
-│       ├── auth.js             → Register / Login / Logout
-│       ├── budgets.js          → Monthly budget CRUD
-│       ├── categories.js       → Budget category management
-│       ├── transactions.js     → Transaction logging
-│       ├── goals.js            → Savings goals
-│       └── analysis.js         → Spending analytics
-│
-└── 📁 frontend/                → The Heist Crew's Walkie-Talkie (Vanilla HTML/CSS/JS)
-    ├── index.html              → Single-page app (everything's here)
-    ├── css/
-    │   └── style.css           → Custom design system (Fraunces + Jakarta Sans)
-    └── js/
-        ├── api.js              → API client layer
-        ├── app.js              → Main app logic & UI controller
-        ├── charts.js           → Chart.js visualizations
-        └── demo.js             → Offline demo with sample data
+╔═════════════════════════════════════════════════════════╗
+║                                                         ║
+║   THE PROBLEM STATEMENT                                 ║
+║   (or: Why The Professor sat down and built this)       ║
+║                                                         ║
+╚═════════════════════════════════════════════════════════╝
 ```
 
-**Tech Stack:**
-| Layer | Technology |
-|-------|-----------|
-| Frontend | HTML5 + Vanilla CSS + Vanilla JS |
-| UI Components | Bootstrap 5 |
-| Charts | Chart.js |
-| Backend | Node.js + Express 4 |
-| Database | PostgreSQL 15+ |
-| Auth | JWT (httpOnly cookie) + bcrypt |
-| Security | Helmet, HPP, express-rate-limit, express-validator |
+Let me tell you a story that every Indian student and junior professional knows too well.
+
+It's the **1st of the month.** Salary hits. You feel like a millionaire. You pay rent. You recharge subscriptions. You tell yourself you'll be responsible this month.
+
+Then comes the **small stuff.** ₹180 for a chai and samosa run. ₹450 for that Swiggy order at midnight. ₹800 for a course you'll definitely start next week. ₹1,200 on a weekend hangout. ₹300 here. ₹600 there. None of it feels like a big deal.
+
+**It's the 22nd. You open your bank app. There's almost nothing left.**
+
+The worst part? You cannot explain where it went. It didn't feel like spending. It felt like *living.*
 
 ---
 
-## 🚀 Quick Setup (The Heist Begins)
+### 🚨 The Gaps That Existing Apps Leave
 
-### Prerequisites
-- [Node.js](https://nodejs.org) 18+
-- [PostgreSQL](https://postgresql.org) 15+
-- Git
+Every existing budgeting app was built for someone else:
 
----
+| The Problem | Why It Hurts |
+|---|---|
+| 💸 **No accountability for ₹100–500 small expenses** | This is where 40% of a young professional's salary leaks. Silently. |
+| 🗓️ **No visibility into month-end pressure** | You don't know you're overspending until you're already broke. |
+| 🌍 **Built for Western contexts** | USD-centric apps ignore UPI, allowance splits, and Indian expense patterns entirely. |
+| 🧩 **Too complex or too simple** | Enterprise-grade apps overwhelm you. Basic apps give you a bar chart and nothing else. |
+| 🎯 **No connection between spending and goals** | Your dream laptop, Goa trip, or certification course has zero visibility alongside your daily expenses. |
 
-### 1️⃣ Clone the Repo
+The creator didn't just want an app. They wanted a **system.** A Professor-style plan that treats your salary with the same respect a master heist strategist gives to every second, every movement, every contingency.
 
-```bash
-git clone https://github.com/Dhaval-0511/Money-Hiest.git
-cd Money-Hiest
-```
-
----
-
-### 2️⃣ Backend Setup
-
-```bash
-cd backend
-
-# Copy environment template
-cp .env.example .env
-```
-
-Open `.env` and fill in your values:
-```env
-PGHOST=localhost
-PGPORT=5432
-PGDATABASE=expense_tracker
-PGUSER=postgres
-PGPASSWORD=your_postgres_password
-
-JWT_SECRET=replace_with_a_long_random_secret_at_least_64_chars
-JWT_EXPIRES_IN=7d
-
-PORT=4000
-CORS_ORIGIN=http://localhost:5500
-```
-
-```bash
-# Create the database
-createdb -U postgres expense_tracker
-
-# Run the schema (creates all tables + triggers)
-psql -U postgres -d expense_tracker -f schema.sql
-
-# Install dependencies
-npm install
-
-# Start in development mode (with auto-reload)
-npm run dev
-```
-
-> ✅ API will be live at **http://localhost:4000**
-> ✅ Health check: **http://localhost:4000/api/health**
+> 🔴 *"The biggest robbery isn't happening in a bank. It's happening in your own wallet — one UPI payment at a time."*
 
 ---
 
-### 3️⃣ Frontend Setup
+<br />
 
-Open a **new terminal**:
-
-```bash
-cd frontend
-
-# Option A: Using npx serve (recommended)
-npx serve . -l 5500
-
-# Option B: Python (if you have it)
-python -m http.server 5500
-
-# Option C: VS Code Live Server extension
-# Right-click index.html → Open with Live Server
-```
-
-> ✅ App will be live at **http://localhost:5500**
-
----
-
-### 🎯 No Backend? No Problem!
-
-On the login screen, click **"Explore with sample data"** — the entire app runs with realistic demo data stored in your browser's `localStorage`. No PostgreSQL, no backend, no problem. Try every screen instantly!
-
----
-
-## 📖 API Reference
+## 💰 ACT III — WHAT IT SOLVES
 
 ```
-GET    /api/health                    → Health check
-
-POST   /api/auth/register             → Create account
-POST   /api/auth/login                → Login
-POST   /api/auth/logout               → Logout
-
-GET    /api/budgets                   → Get all budgets
-POST   /api/budgets                   → Create monthly budget
-PUT    /api/budgets/:id               → Update budget
-GET    /api/budgets/current           → Current month's budget
-
-GET    /api/categories/:budgetId      → Get categories for a budget
-POST   /api/categories               → Add category
-PUT    /api/categories/:id           → Update category
-
-GET    /api/transactions             → List transactions
-POST   /api/transactions             → Add transaction
-DELETE /api/transactions/:id        → Delete transaction
-
-GET    /api/goals                    → List goals
-POST   /api/goals                    → Create goal
-POST   /api/goals/:id/contribute     → Add contribution
-DELETE /api/goals/:id                → Delete goal
-
-GET    /api/analysis/summary         → Spending summary
-GET    /api/analysis/trends          → Month-over-month trends
+╔═════════════════════════════════════════════════════════╗
+║                                                         ║
+║   THE HEIST PLAN                                        ║
+║   (Five Problems. Five Solutions. One App.)             ║
+║                                                         ║
+╚═════════════════════════════════════════════════════════╝
 ```
 
----
+### 🔍 Problem 1 → The Black Hole of Visibility
 
-## 🎨 Design Philosophy
+**Before:** You had a *feeling* you spent too much on food. A feeling. No numbers, no proof, just anxiety.
 
-> *"Simplicity is the ultimate sophistication"* — but we added a little flair anyway.
+**After:** Every rupee is logged, tagged, and categorized. Food. Bills. Shopping. Investments. Upskilling. Lifestyle. You stop guessing. You start knowing. The black hole collapses into a chart you can actually act on.
 
-The visual identity pairs:
-- **Fraunces** — a serif ledger face for headlines (because money is serious)
-- **Plus Jakarta Sans** — clean modern UI text
-- **IBM Plex Mono** — monospace for every ₹ amount (so numbers line up like a real statement)
-
-The signature element: **receipt-edge** perforated paper on hero cards — a nod to physical cash receipts. Fitting for an app about tracking every rupee.
-
-Color system: Indigo × Teal × Amber — not the usual fintech cream-and-terracotta. Green/Amber/Red used *only* functionally for On-track / Near-limit / Overspent status.
+> *"Visibility is power. The Professor never walked into a heist blind. Neither should you."* 👁️
 
 ---
 
-## 🧠 Smart Design Decisions
+### 🧱 Problem 2 → The Illusion of Control
 
-| Feature | Decision |
-|---------|----------|
-| Cash/Online remaining | Shows spending pressure per payment method against whole budget (data model doesn't track which income arrived as cash vs online — intentionally) |
-| Month switching | Auto-carries forward previous month's income & split — so you're not forced to re-onboard every month |
-| Triggers in DB | `actual_amount` on categories and `current_amount` on goals are kept in sync by PostgreSQL triggers — no app-level sync bugs |
-| Demo mode | Full offline experience with `localStorage` — zero friction to try the app |
+**Before:** You thought you were being responsible. You paid your bills. You weren't buying anything "big." Yet the money kept disappearing.
 
----
+**After:** You set category limits before the month starts. When you approach a limit, the app warns you — not after you've crossed it, not at month-end, but **right when it matters.** You hold the line. The budget holds. You feel like The Professor watching his plan unfold exactly as designed.
 
-## 🤝 Contributing
-
-This is a personal project, but if it helps you and you want to improve it:
-
-1. Fork the repo
-2. Create your feature branch: `git checkout -b feature/epic-feature`
-3. Commit your changes: `git commit -m 'Add some epic feature'`
-4. Push to the branch: `git push origin feature/epic-feature`
-5. Open a Pull Request
-
-Bug reports and feature suggestions are welcome via [Issues](https://github.com/Dhaval-0511/Money-Hiest/issues)!
+> *"Control isn't about restricting yourself. It's about knowing your limits before the situation forces them on you."* 🧱
 
 ---
 
-## 📜 License
+### 🎯 Problem 3 → The Goalless Grind
 
-MIT License — free to use, modify, and distribute.
-See [LICENSE](LICENSE) for details.
+**Before:** You wanted to buy a new laptop. Or save up for a Goa trip. Or fund a data science certification. But these goals lived only in your head — invisible, trackless, constantly deprioritized.
+
+**After:** Goals exist in the app. They have names, targets, and contribution histories. Every time you log a deposit toward a goal, you see the progress bar move. The getaway becomes real. It becomes measurable. It becomes inevitable.
+
+> *"A heist without a getaway plan isn't a heist. It's just chaos."* 🏖️
 
 ---
+
+### 📊 Problem 4 → The Habit of Ignoring Patterns
+
+**Before:** Every month felt like it started fresh — same mistakes, same shock, same regret. You never learned because you never looked back.
+
+**After:** Month-over-month trends show you the patterns you couldn't see before. Was January bad because of the trip? Did March improve because you cooked more? The intel is all there. The data tells you the truth that your memory conveniently forgets.
+
+> *"The crew that studies their past heists makes no mistakes in the next one."* 📈
+
+---
+
+### 🧘 Problem 5 → The Month-End Salary Anxiety
+
+**Before:** The last 8–10 days of every month were a blur of calculator apps, transfer requests, and silent panic. "Did I pay the electricity bill? How much is left? Can I afford this?" Every small purchase carried existential weight.
+
+**After:** You know your numbers. You started the month with a plan. You executed it. The month-end isn't a reckoning — it's a **debrief.** You know what you spent, what you saved, what you hit, and what to adjust next month. Anxiety replaced with **clarity.**
+
+> 🔴 *"Peace of mind isn't the absence of problems. It's knowing your plan is solid enough to handle them."*
+
+---
+
+<br />
 
 <div align="center">
 
-**Made with ❤️ and a lot of ₹ tracking**
-
-*"The best time to start tracking your expenses was yesterday. The second best time is now."*
-
-⭐ If this project helped you, give it a star! It makes The Professor happy.
-
 ```
-  🔴 BELLA CIAO, UNNECESSARY EXPENSES 🔴
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   🎭  YOUR SALARY IS THE BANK.                              ║
+║   💡  YOUR BUDGET IS THE PLAN.                              ║
+║   🔴  YOUR DISCIPLINE IS THE CREW.                          ║
+║   🏅  FINANCIAL FREEDOM IS THE GETAWAY.                     ║
+║                                                              ║
+║   The heist has already begun.                               ║
+║   The only question is: are you running it?                  ║
+║   Or is it running you?                                      ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
 ```
+
+<br />
+
+---
+
+🔴 **BELLA CIAO, UNNECESSARY EXPENSES.** 🔴
+
+---
+
+*Every rupee tracked is a rupee reclaimed.*
+*Every budget set is a battle won.*
+*Every goal hit is your own personal heist — complete.*
+
+<br />
+
+> 👨‍🏫 *"The best time to start tracking your expenses was the day you got your first salary.*
+> *The second best time is right now."*
+>
+> — The Professor
+
+<br />
+
+⭐ *If this README made you smile, the repo deserves a star.*
+*It makes The Professor very, very happy.* 🎭
 
 </div>
