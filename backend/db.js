@@ -2,18 +2,28 @@
 require('dotenv').config();
 const { Pool } = require('pg');
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  host: process.env.PGHOST,
-  port: Number(process.env.PGPORT) || 5432,
-  database: process.env.PGDATABASE,
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  ssl: process.env.PG_SSL === 'true' ? { rejectUnauthorized: false } : false,
-  max: 10,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
-});
+// Use DATABASE_URL (Neon/Render production) or fall back to individual PG vars (local dev)
+const poolConfig = process.env.DATABASE_URL
+  ? {
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }, // required for Neon SSL
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    }
+  : {
+      host: process.env.PGHOST,
+      port: Number(process.env.PGPORT) || 5432,
+      database: process.env.PGDATABASE,
+      user: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
+      ssl: process.env.PG_SSL === 'true' ? { rejectUnauthorized: false } : false,
+      max: 10,
+      idleTimeoutMillis: 30000,
+      connectionTimeoutMillis: 10000,
+    };
+
+const pool = new Pool(poolConfig);
 
 pool.on('error', (err) => {
   // Never crash the whole process on an idle client error
