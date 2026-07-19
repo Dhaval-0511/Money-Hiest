@@ -529,11 +529,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script>
-  // Local dev convenience: if you're serving this file (e.g. via `npx serve` or
-  // VS Code Live Server) separately from the backend, point API calls at it.
-  // In production, deploy the frontend behind the same domain/reverse proxy as
-  // the API and delete this block so it falls back to same-origin '/api'.
-  if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+  // --- Deployment Config ---
+  // When you deploy the Backend to Render, paste its URL here (e.g. 'https://money-heist-backend.onrender.com/api')
+  const PROD_API_URL = ''; // <-- Paste Render URL here (leave empty for local dev)
+  
+  if (PROD_API_URL && !['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+    window.PAISA_API_BASE = PROD_API_URL;
+  } else if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
     window.PAISA_API_BASE = 'http://localhost:4000/api';
   }
 </script>
