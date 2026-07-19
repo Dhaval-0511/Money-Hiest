@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Paisa Plan — Personal Expense &amp; Goals Tracker</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<!-- Fonts: Fraunces (display), Plus Jakarta Sans (body), IBM Plex Mono (ledger numbers) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ TOP NAVBAR ============ -->
+<nav class="app-navbar navbar navbar-expand-lg sticky-top">
+  <div class="container-fluid px-3 px-lg-4">
+    <a class="navbar-brand app-brand" href="#" onclick="return false;">
+      <span class="brand-mark">₹</span> Paisa Plan
+    </a>
+
+    <div class="d-flex align-items-center gap-2 order-lg-3">
+      <button class="btn btn-icon" id="themeToggleBtn" title="Toggle dark mode" aria-label="Toggle dark mode">
+        <i class="bi bi-moon-stars-fill"></i>
+      </button>
+      <div class="month-switcher" id="monthSwitcher">
+        <button class="btn btn-icon btn-sm" id="prevMonthBtn"><i class="bi bi-chevron-left"></i></button>
+        <span id="currentMonthLabel" class="month-label">July 2026</span>
+        <button class="btn btn-icon btn-sm" id="nextMonthBtn"><i class="bi bi-chevron-right"></i></button>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-icon" data-bs-toggle="dropdown" aria-label="Account menu">
+          <i class="bi bi-person-circle"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><span class="dropdown-item-text small text-muted" id="userEmailLabel">guest@paisaplan.app</span></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#" id="exportCsvBtn"><i class="bi bi-download me-2"></i>Export CSV</a></li>
+          <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Log out</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="navbar-toggler order-lg-2" type="button" data-bs-toggle="collapse" data-bs-target="#navTabsCollapse">
+      <i class="bi bi-list"></i>
+    </button>
+
+    <div class="collapse navbar-collapse order-lg-1" id="navTabsCollapse">
+      <ul class="nav app-tabs" id="mainTabs">
+        <li class="nav-item"><button class="nav-link active" data-view="dashboard"><i class="bi bi-grid-1x2 me-1"></i>Dashboard</button></li>
+        <li class="nav-item"><button class="nav-link" data-view="goals"><i class="bi bi-trophy me-1"></i>Goals</button></li>
+        <li class="nav-item"><button class="nav-link" data-view="analysis"><i class="bi bi-pie-chart me-1"></i>Analysis</button></li>
+        <li class="nav-item"><button class="nav-link" data-view="history"><i class="bi bi-clock-history me-1"></i>History</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ AUTH SCREEN ============ -->
+<section id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-hero">
+      <div class="receipt-edge"></div>
+      <span class="brand-mark brand-mark-lg">₹</span>
+      <h1>Paisa Plan</h1>
+      <p>Plan your allowance. Track every rupee — cash or online. Reach your goals.</p>
+    </div>
+    <div class="auth-form">
+      <ul class="nav nav-pills auth-pills mb-3" id="authPills">
+        <li class="nav-item"><button class="nav-link active" data-auth="login">Log in</button></li>
+        <li class="nav-item"><button class="nav-link" data-auth="register">Create account</button></li>
+      </ul>
+      <form id="authForm" novalidate>
+        <div class="mb-3 d-none" id="displayNameField">
+          <label class="form-label">Your name</label>
+          <input type="text" class="form-control" id="authDisplayName" placeholder="e.g. Aarav Shah">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" id="authEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" id="authPassword" placeholder="At least 8 characters" required>
+        </div>
+        <div class="alert alert-danger d-none py-2 small" id="authError"></div>
+        <button type="submit" class="btn btn-primary-brand w-100" id="authSubmitBtn">Log in</button>
+        <button type="button" class="btn btn-outline-secondary w-100 mt-2" id="demoModeBtn">
+          <i class="bi bi-play-circle me-1"></i> Explore with sample data
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONBOARDING ============ -->
+<section id="onboardingScreen" class="onboarding-screen d-none">
+  <div class="container py-4 py-lg-5" style="max-width:720px;">
+
+    <div id="onboardStep1" class="onboard-step">
+      <div class="step-eyebrow">Step 1 of 2</div>
+      <h2 class="step-title">Enter your monthly income &amp; allowances</h2>
+      <p class="text-muted">Add whatever applies — salary, allowances from parents, or other income.</p>
+
+      <div class="card premium-card p-3 p-lg-4 mt-3">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Monthly salary <span class="text-muted">(optional)</span></label>
+            <div class="input-group"><span class="input-group-text">₹</span>
+              <input type="number" min="0" class="form-control" id="inSalary" placeholder="0">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Parental travel allowance</label>
+            <div class="input-group"><span class="input-group-text">₹</span>
+              <input type="number" min="0" class="form-control" id="inTravel" placeholder="3,000">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Parental bill allowance</label>
+            <div class="input-group"><span class="input-group-text">₹</span>
+              <input type="number" min="0" class="form-control" id="inBillAllowance" placeholder="2,000">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Other income <span class="text-muted">(optional)</span></label>
+            <div class="input-group"><span class="input-group-text">₹</span>
+              <input type="number" min="0" class="form-control" id="inOther" placeholder="0">
+            </div>
+          </div>
+        </div>
+        <div class="total-income-strip mt-4">
+          <span>Total monthly income</span>
+          <strong id="totalIncomePreview">₹0</strong>
+        </div>
+        <div class="alert alert-danger d-none py-2 small mt-3" id="step1Error">Enter at least one amount greater than ₹0.</div>
+      </div>
+
+      <button class="btn btn-primary-brand btn-lg w-100 mt-4" id="toStep2Btn">Continue <i class="bi bi-arrow-right ms-1"></i></button>
+    </div>
+
+    <div id="onboardStep2" class="onboard-step d-none">
+      <div class="step-eyebrow">Step 2 of 2</div>
+      <h2 class="step-title">Choose your budget style</h2>
+      <p class="text-muted">Pick a split, or set your own custom percentages.</p>
+
+      <div class="row g-3 mt-2" id="templateGrid"></div>
+
+      <div class="card premium-card p-3 p-lg-4 mt-3 d-none" id="customTemplateCard">
+        <div class="row g-3">
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Expenses %</label>
+            <input type="number" class="form-control custom-pct" data-key="expenses" value="60">
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Investments %</label>
+            <input type="number" class="form-control custom-pct" data-key="investments" value="20">
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Upskilling %</label>
+            <input type="number" class="form-control custom-pct" data-key="upskilling" value="10">
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Lifestyle %</label>
+            <input type="number" class="form-control custom-pct" data-key="lifestyle" value="10">
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <span class="text-muted small">Must total 100%</span>
+          <strong id="customPctTotal">Total: 100%</strong>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2 mt-4">
+        <button class="btn btn-outline-secondary" id="backToStep1Btn"><i class="bi bi-arrow-left"></i></button>
+        <button class="btn btn-primary-brand btn-lg flex-grow-1" id="finishOnboardingBtn">Create my budget <i class="bi bi-check2 ms-1"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAIN APP ============ -->
+<main id="appMain" class="app-main d-none">
+  <div class="container-fluid px-3 px-lg-4 py-3 py-lg-4">
+
+    <!-- ---------- DASHBOARD VIEW ---------- -->
+    <div id="view-dashboard" class="app-view">
+
+      <div class="hero-summary-card receipt-edge">
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="hero-label">Total monthly income</div>
+            <div class="hero-amount" id="heroTotalIncome">₹0</div>
+            <div class="hero-sub-row">
+              <div><span class="dot dot-planned"></span>Planned <strong id="heroPlanned">₹0</strong></div>
+              <div><span class="dot dot-actual"></span>Actual <strong id="heroActual">₹0</strong></div>
+            </div>
+            <p class="hero-insight" id="heroInsightText">You are on track with your budget this month.</p>
+          </div>
+          <div class="col-lg-5">
+            <div class="balance-mini-grid">
+              <div class="balance-mini cash">
+                <i class="bi bi-cash-coin"></i>
+                <div><span>Cash remaining</span><strong id="cashRemaining">₹0</strong></div>
+              </div>
+              <div class="balance-mini online">
+                <i class="bi bi-credit-card-2-front"></i>
+                <div><span>Online remaining</span><strong id="onlineRemaining">₹0</strong></div>
+              </div>
+              <div class="balance-mini total">
+                <i class="bi bi-wallet2"></i>
+                <div><span>Total remaining</span><strong id="totalRemaining">₹0</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+        <h5 class="section-title mb-0">Budget heads</h5>
+        <span class="text-muted small">Tap a card for details</span>
+      </div>
+      <div class="row g-3" id="headCardsGrid"><!-- head cards injected by JS --></div>
+
+      <div class="d-flex align-items-center justify-content-between mt-4 mb-2">
+        <h5 class="section-title mb-0">Quick daily log</h5>
+      </div>
+      <div class="card premium-card p-3">
+        <div class="row g-2 align-items-end">
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Amount</label>
+            <div class="input-group input-group-sm"><span class="input-group-text">₹</span>
+              <input type="number" class="form-control" id="quickAmount" placeholder="50">
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Category</label>
+            <select class="form-select form-select-sm" id="quickCategory"></select>
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Payment</label>
+            <div class="btn-group w-100 pay-toggle" role="group" id="quickPayToggle">
+              <input type="radio" class="btn-check" name="quickPay" id="quickPayCash" checked>
+              <label class="btn btn-outline-secondary btn-sm" for="quickPayCash"><i class="bi bi-cash"></i> Cash</label>
+              <input type="radio" class="btn-check" name="quickPay" id="quickPayOnline">
+              <label class="btn btn-outline-secondary btn-sm" for="quickPayOnline"><i class="bi bi-phone"></i> Online</label>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <button class="btn btn-primary-brand btn-sm w-100" id="quickAddSubmitBtn"><i class="bi bi-plus-lg"></i> Log spend</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- HEAD DETAIL VIEW ---------- -->
+    <div id="view-headDetail" class="app-view d-none">
+      <button class="btn btn-sm btn-outline-secondary mb-3" id="backToDashboardBtn"><i class="bi bi-arrow-left me-1"></i>Back to dashboard</button>
+      <div class="head-detail-header">
+        <div class="head-detail-icon" id="headDetailIcon"><i class="bi bi-receipt"></i></div>
+        <div>
+          <h3 class="mb-0" id="headDetailTitle">Bills</h3>
+          <p class="text-muted mb-0" id="headDetailSubtext">This month you can spend up to ₹0 on Bills.</p>
+        </div>
+      </div>
+      <div class="progress premium-progress my-3" style="height:14px;">
+        <div class="progress-bar" id="headDetailProgressBar" style="width:0%"></div>
+      </div>
+      <div id="headDetailCategoryList" class="list-group category-list"></div>
+      <button class="btn btn-outline-secondary btn-sm mt-3" id="addCustomCategoryBtn"><i class="bi bi-plus-lg me-1"></i>Add custom category</button>
+    </div>
+
+    <!-- ---------- GOALS VIEW ---------- -->
+    <div id="view-goals" class="app-view d-none">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="section-title mb-0">Your goals</h5>
+        <button class="btn btn-primary-brand btn-sm" id="newGoalBtn"><i class="bi bi-plus-lg me-1"></i>New goal</button>
+      </div>
+      <div class="row g-3 mb-3">
+        <div class="col-6 col-md-3">
+          <div class="stat-pill"><span>Total saved</span><strong id="goalsTotalSaved">₹0</strong></div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-pill"><span>Active goals</span><strong id="goalsActiveCount">0</strong></div>
+        </div>
+      </div>
+      <div class="row g-3" id="goalsGrid"></div>
+    </div>
+
+    <!-- ---------- ANALYSIS VIEW ---------- -->
+    <div id="view-analysis" class="app-view d-none">
+      <h5 class="section-title mb-3">Monthly analysis</h5>
+
+      <div class="row g-3 mb-2" id="summaryCardsRow"></div>
+
+      <div class="row g-3 mt-1">
+        <div class="col-lg-6">
+          <div class="card premium-card p-3">
+            <h6 class="chart-card-title">Overall allocation</h6>
+            <canvas id="allocationChart" height="240"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card premium-card p-3">
+            <h6 class="chart-card-title">Cash vs Online spending</h6>
+            <canvas id="cashOnlineChart" height="240"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card premium-card p-3">
+            <h6 class="chart-card-title">Planned vs Actual by head</h6>
+            <canvas id="plannedActualChart" height="260"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card premium-card p-3">
+            <h6 class="chart-card-title">Bills breakdown</h6>
+            <canvas id="billsChart" height="260"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card premium-card p-3 mt-3">
+        <h6 class="chart-card-title">Insights</h6>
+        <ul class="insight-list" id="insightList"></ul>
+      </div>
+    </div>
+
+    <!-- ---------- HISTORY VIEW ---------- -->
+    <div id="view-history" class="app-view d-none">
+      <h5 class="section-title mb-3">Transaction history</h5>
+      <div class="card premium-card p-3 mb-3">
+        <div class="row g-2">
+          <div class="col-6 col-md-3">
+            <label class="form-label small">From</label>
+            <input type="date" class="form-control form-control-sm" id="filterFrom">
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">To</label>
+            <input type="date" class="form-control form-control-sm" id="filterTo">
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Head</label>
+            <select class="form-select form-select-sm" id="filterHead">
+              <option value="">All heads</option>
+              <option>Expenses</option><option>Bills</option><option>Shopping</option>
+              <option>Investments</option><option>Upskilling</option><option>Lifestyle</option>
+            </select>
+          </div>
+          <div class="col-6 col-md-3">
+            <label class="form-label small">Payment</label>
+            <select class="form-select form-select-sm" id="filterPayment">
+              <option value="">Cash &amp; Online</option>
+              <option>Cash</option><option>Online</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table premium-table align-middle">
+          <thead><tr><th>Date</th><th>Category</th><th>Head</th><th>Payment</th><th>Note</th><th class="text-end">Amount</th><th></th></tr></thead>
+          <tbody id="historyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FLOATING QUICK-ADD BUTTON ============ -->
+<button class="fab" id="fabAddBtn" title="Quick add expense" aria-label="Quick add expense">
+  <i class="bi bi-plus-lg"></i>
+</button>
+
+<!-- ============ QUICK ADD MODAL ============ -->
+<div class="modal fade" id="quickAddModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content premium-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Log an expense</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Amount</label>
+          <div class="input-group"><span class="input-group-text">₹</span>
+            <input type="number" class="form-control" id="modalAmount" placeholder="0" autofocus>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Category</label>
+          <select class="form-select" id="modalCategory"></select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Payment method</label>
+          <div class="btn-group w-100 pay-toggle" role="group">
+            <input type="radio" class="btn-check" name="modalPay" id="modalPayCash" checked>
+            <label class="btn btn-outline-secondary" for="modalPayCash"><i class="bi bi-cash"></i> Cash</label>
+            <input type="radio" class="btn-check" name="modalPay" id="modalPayOnline">
+            <label class="btn btn-outline-secondary" for="modalPayOnline"><i class="bi bi-phone"></i> Online</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Date</label>
+          <input type="date" class="form-control" id="modalDate">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Note <span class="text-muted">(optional)</span></label>
+          <input type="text" class="form-control" id="modalNote" placeholder="e.g. Chai with friends" maxlength="120">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary-brand" id="modalSubmitBtn">Save expense</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ NEW GOAL MODAL ============ -->
+<div class="modal fade" id="goalModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content premium-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">New savings goal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Goal name</label>
+          <input type="text" class="form-control" id="goalName" placeholder="e.g. Garba Classes" list="goalSuggestions">
+          <datalist id="goalSuggestions">
+            <option value="Garba Classes"><option value="Gym Membership">
+            <option value="Clothing Fund"><option value="Travel Fund"><option value="Emergency Fund">
+          </datalist>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Target amount</label>
+          <div class="input-group"><span class="input-group-text">₹</span>
+            <input type="number" class="form-control" id="goalTarget" placeholder="3,000">
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Deadline <span class="text-muted">(optional)</span></label>
+          <input type="date" class="form-control" id="goalDeadline">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary-brand" id="goalSubmitBtn">Create goal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADD MONEY TO GOAL MODAL ============ -->
+<div class="modal fade" id="addMoneyModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content premium-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Add money to <span id="addMoneyGoalName">goal</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Amount</label>
+          <div class="input-group"><span class="input-group-text">₹</span>
+            <input type="number" class="form-control" id="addMoneyAmount" placeholder="500">
+          </div>
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Payment method</label>
+          <div class="btn-group w-100 pay-toggle" role="group">
+            <input type="radio" class="btn-check" name="addMoneyPay" id="addMoneyPayCash" checked>
+            <label class="btn btn-outline-secondary" for="addMoneyPayCash"><i class="bi bi-cash"></i> Cash</label>
+            <input type="radio" class="btn-check" name="addMoneyPay" id="addMoneyPayOnline">
+            <label class="btn btn-outline-secondary" for="addMoneyPayOnline"><i class="bi bi-phone"></i> Online</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary-brand" id="addMoneySubmitBtn">Add money</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADD CUSTOM CATEGORY MODAL ============ -->
+<div class="modal fade" id="customCategoryModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content premium-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Add custom category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Category name</label>
+          <input type="text" class="form-control" id="customCategoryName" placeholder="e.g. Pet care">
+        </div>
+        <div class="mb-1">
+          <label class="form-label">Planned amount <span class="text-muted">(optional)</span></label>
+          <div class="input-group"><span class="input-group-text">₹</span>
+            <input type="number" class="form-control" id="customCategoryPlanned" placeholder="0">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary-brand" id="customCategorySubmitBtn">Add category</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast for confirmations -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="appToast" class="toast premium-toast" role="status">
+    <div class="toast-body" id="appToastBody">Saved.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+  // Local dev convenience: if you're serving this file (e.g. via `npx serve` or
+  // VS Code Live Server) separately from the backend, point API calls at it.
+  // In production, deploy the frontend behind the same domain/reverse proxy as
+  // the API and delete this block so it falls back to same-origin '/api'.
+  if (['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+    window.PAISA_API_BASE = 'http://localhost:4000/api';
+  }
+</script>
+<script src="js/api.js"></script>
+<script src="js/demo.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
