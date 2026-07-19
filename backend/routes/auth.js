@@ -28,8 +28,8 @@ function signToken(user) {
 function setAuthCookie(res, token) {
   res.cookie('token', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    secure: true, // always true — Render uses HTTPS and cross-origin requires it
+    sameSite: 'none', // required for cross-origin (Vercel frontend ↔ Render backend)
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 }
